@@ -77,6 +77,17 @@ public class BSTTest {
 
 		System.out.println();
 
+		System.out.println("********************************** Test(6) search -- without Comparator \n");
+
+		BST<Integer> B6 = new BST<>();
+		System.out.println("Should print false: " + B6.search(3));
+		B6.insert(4);
+		B6.insert(6);
+		B6.insert(5);
+		System.out.println("Should print true: " + B6.search(4));
+		System.out.println("Should print false: " + B6.search(3));
+		System.out.println();
+
 		System.out.println("****************************************************** End of BSTTest");
 
 	}
