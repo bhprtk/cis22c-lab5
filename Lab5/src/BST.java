@@ -72,7 +72,7 @@ public class BST<T extends Comparable<T>> {
 	 * @return whether the tree is empty
 	 */
 	public boolean isEmpty() {
-		return false;
+		return root == null;
 	}
 
 	/**

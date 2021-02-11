@@ -88,6 +88,15 @@ public class BSTTest {
 		System.out.println("Should print false: " + B6.search(3));
 		System.out.println();
 
+		System.out.println("********************************** Test(7) isEmpty() \n");
+
+		BST<Integer> B7 = new BST<>();
+		System.out.println("Should print true: " + B7.isEmpty());
+		B7.insert(1);
+		B7.insert(2);
+		System.out.println("Should print false: " + B7.isEmpty());
+		System.out.println();
+
 		System.out.println("****************************************************** End of BSTTest");
 
 	}
