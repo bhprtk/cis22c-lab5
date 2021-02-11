@@ -1,3 +1,5 @@
+import java.util.NoSuchElementException;
+
 public class BSTTest {
 	public static void main(String[] args) {
 		System.out.println("********************************** Test(1) Constructor\n");
@@ -95,6 +97,20 @@ public class BSTTest {
 		B7.insert(1);
 		B7.insert(2);
 		System.out.println("Should print false: " + B7.isEmpty());
+		System.out.println();
+
+		System.out.println("********************************** Test(8) findMin() \n");
+		BST<Integer> B8 = new BST<>();
+		System.out.print("Should print error: ");
+		try {
+			B8.findMin();
+		} catch (NoSuchElementException e) {
+			System.out.println(e.getMessage());
+		}
+		B8.insert(2);
+		B8.insert(5);
+		B8.insert(8);
+		System.out.println("Should print 2: " + B8.findMin());
 		System.out.println();
 
 		System.out.println("****************************************************** End of BSTTest");

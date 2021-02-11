@@ -121,7 +121,10 @@ public class BST<T extends Comparable<T>> {
 	 * @throws NoSuchElementException when the precondition is violated
 	 */
 	public T findMin() throws NoSuchElementException {
-		return null;
+		if (isEmpty()) {
+			throw new NoSuchElementException("findMin(): " + "BST is empty, cannot find min!");
+		}
+		return findMin(root);
 	}
 
 	/**
@@ -131,7 +134,10 @@ public class BST<T extends Comparable<T>> {
 	 * @return the smallest value in the tree
 	 */
 	private T findMin(Node node) {
-		return null;
+		if (node.left != null) {
+			return findMin(node.left);
+		}
+		return node.data;
 	}
 
 	/**
