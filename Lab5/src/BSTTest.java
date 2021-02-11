@@ -43,6 +43,23 @@ public class BSTTest {
 
 		System.out.println();
 
+		System.out.println("********************************** Test(4) postOrderPrint \n");
+
+		BST<Integer> B4 = new BST<>();
+		B4.insert(4);
+		B4.insert(6);
+		B4.insert(5);
+		System.out.print("Should print 5 6 4: ");
+		B4.postOrderPrint();
+		B4.insert(7);
+		B4.insert(2);
+		B4.insert(3);
+		B4.insert(1);
+		System.out.print("Should print 1 3 2 5 7 6 4: ");
+		B4.postOrderPrint();
+
+		System.out.println();
+
 		System.out.println("****************************************************** End of BSTTest");
 
 	}
