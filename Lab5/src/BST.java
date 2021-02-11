@@ -148,7 +148,10 @@ public class BST<T extends Comparable<T>> {
 	 * @throws NoSuchElementException when the precondition is violated
 	 */
 	public T findMax() throws NoSuchElementException {
-		return null;
+		if (isEmpty()) {
+			throw new NoSuchElementException("findMax(): " + "BST is empty, cannot find min!");
+		}
+		return findMax(root);
 	}
 
 	/**
@@ -158,7 +161,10 @@ public class BST<T extends Comparable<T>> {
 	 * @return the largest value in the tree
 	 */
 	private T findMax(Node node) {
-		return null;
+		if (node.right != null) {
+			return findMax(node.right);
+		}
+		return node.data;
 	}
 
 	/**

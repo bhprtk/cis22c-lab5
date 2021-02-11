@@ -113,6 +113,20 @@ public class BSTTest {
 		System.out.println("Should print 2: " + B8.findMin());
 		System.out.println();
 
+		System.out.println("********************************** Test(9) findMax() \n");
+		BST<Integer> B9 = new BST<>();
+		System.out.print("Should print error: ");
+		try {
+			B9.findMax();
+		} catch (NoSuchElementException e) {
+			System.out.println(e.getMessage());
+		}
+		B9.insert(2);
+		B9.insert(5);
+		B9.insert(8);
+		System.out.println("Should print 8: " + B9.findMax());
+		System.out.println();
+
 		System.out.println("****************************************************** End of BSTTest");
 
 	}
