@@ -60,6 +60,23 @@ public class BSTTest {
 
 		System.out.println();
 
+		System.out.println("********************************** Test(5) preOrderPrint \n");
+
+		BST<Integer> B5 = new BST<>();
+		B5.insert(4);
+		B5.insert(6);
+		B5.insert(5);
+		System.out.print("Should print 4 6 5: ");
+		B5.preOrderPrint();
+		B5.insert(7);
+		B5.insert(2);
+		B5.insert(3);
+		B5.insert(1);
+		System.out.print("Should print 4 2 1 3 6 5 7: ");
+		B5.preOrderPrint();
+
+		System.out.println();
+
 		System.out.println("****************************************************** End of BSTTest");
 
 	}
