@@ -127,6 +127,41 @@ public class BSTTest {
 		System.out.println("Should print 8: " + B9.findMax());
 		System.out.println();
 
+		System.out.println("********************************** Test(10) remove() \n");
+
+		BST<Integer> B10 = new BST<>();
+		System.out.print("Should print error: ");
+		try {
+			B10.remove(2);
+		} catch (NoSuchElementException e) {
+			System.out.println(e.getMessage());
+		}
+		B10.insert(5);
+		B10.insert(2);
+		B10.insert(18);
+		B10.insert(-4);
+		B10.insert(3);
+		B10.insert(21);
+		B10.insert(19);
+		B10.insert(25);
+
+		B10.inOrderPrint();
+		B10.remove(18);
+		B10.inOrderPrint();
+
+		System.out.println("********************************** Test(11) getRoot() \n");
+		BST<Integer> B11 = new BST<>();
+		try {
+			B11.getRoot();
+		} catch (NoSuchElementException e) {
+			System.out.println("Should print error: " + e.getMessage());
+		}
+
+		B11.insert(2);
+		B11.insert(3);
+		System.out.println("Should print 2: " + B11.getRoot());
+		System.out.println();
+
 		System.out.println("****************************************************** End of BSTTest");
 
 	}

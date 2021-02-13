@@ -63,7 +63,10 @@ public class BST<T extends Comparable<T>> {
 	 * @throws NoSuchElementException when precondition is violated
 	 */
 	public T getRoot() throws NoSuchElementException {
-		return null;
+		if (isEmpty()) {
+			throw new NoSuchElementException("getRoot(): " + "BST is empty. Cannot get root!");
+		}
+		return root.data;
 	}
 
 	/**
@@ -268,9 +271,16 @@ public class BST<T extends Comparable<T>> {
 	 * @param data the value to remove
 	 * @param c    the Comparator indicating how data in the tree is organized Note:
 	 *             updates nothing when the element is not in the tree
+	 * @precondition !isEmpty()
+	 * @precondition the data is located in the tree
+	 * @throws NoSuchElementException when the precondition is violated
 	 */
-	public void remove(T data, Comparator<T> c) throws NoSuchElementException {
-		// fill in here
+//	public void remove(T data, Comparator<T> c) throws NoSuchElementException {
+	public void remove(T data) throws NoSuchElementException {
+		if (isEmpty()) {
+			throw new NoSuchElementException("remove(): " + "BST is empty. Cannot remove!");
+		}
+		remove(data, root);
 	}
 
 	/**
@@ -281,8 +291,34 @@ public class BST<T extends Comparable<T>> {
 	 * @param c    the Comparator indicating how data in the tree is organized
 	 * @return an updated reference variable
 	 */
-	private Node remove(T data, Node node, Comparator<T> c) {
-		return null;
+//	private Node remove(T data, Node node, Comparator<T> c) {
+	private Node remove(T data, Node node) {
+		if (node == null) {
+			return node;
+		} else if (data.compareTo(node.data) < 0) {
+			// data < node.data
+			node.left = remove(data, node.left);
+		} else if (data.compareTo(node.data) > 0) {
+			// data > node.data
+			node.right = remove(data, node.right);
+		} else {
+			if (node.right == null && node.left == null) {
+				// leaf node
+				node = null;
+			} else if (node.left != null && node.right == null) {
+				// has left child but no right child
+				node = node.left;
+			} else if (node.left == null && node.right != null) {
+				// has right child but no left child
+				node = node.right;
+			} else {
+				// has both child
+				T minRight = findMin(node.right);
+				node.data = minRight;
+				node.right = remove(minRight, node.right);
+			}
+		}
+		return node;
 	}
 
 	/*** ADDITONAL OPERATIONS ***/
