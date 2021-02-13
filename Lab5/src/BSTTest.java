@@ -162,6 +162,19 @@ public class BSTTest {
 		System.out.println("Should print 2: " + B11.getRoot());
 		System.out.println();
 
+		System.out.println("********************************** Test(12) getSize() \n");
+		BST<Integer> B12 = new BST<>();
+		System.out.println("Should return 0: " + B12.getSize());
+		B12.insert(5);
+		B12.insert(4);
+		B12.insert(5);
+		B12.insert(7);
+		B12.insert(3);
+
+		System.out.println("Should return 5: " + B12.getSize());
+
+		System.out.println();
+
 		System.out.println("****************************************************** End of BSTTest");
 
 	}

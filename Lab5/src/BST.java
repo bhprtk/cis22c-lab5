@@ -84,7 +84,10 @@ public class BST<T extends Comparable<T>> {
 	 * @return the size of the tree
 	 */
 	public int getSize() {
-		return -1;
+		if (isEmpty()) {
+			return 0;
+		}
+		return getSize(root);
 	}
 
 	/**
@@ -94,7 +97,10 @@ public class BST<T extends Comparable<T>> {
 	 * @return the size of the tree
 	 */
 	private int getSize(Node node) {
-		return -1;
+		if (node == null) {
+			return 0;
+		}
+		return getSize(node.left) + getSize(node.right) + 1;
 	}
 
 	/**
