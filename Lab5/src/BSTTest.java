@@ -164,15 +164,32 @@ public class BSTTest {
 
 		System.out.println("********************************** Test(12) getSize() \n");
 		BST<Integer> B12 = new BST<>();
-		System.out.println("Should return 0: " + B12.getSize());
+		System.out.println("Should print 0: " + B12.getSize());
 		B12.insert(5);
 		B12.insert(4);
 		B12.insert(5);
 		B12.insert(7);
 		B12.insert(3);
 
-		System.out.println("Should return 5: " + B12.getSize());
+		System.out.println("Should print 5: " + B12.getSize());
 
+		System.out.println();
+
+		System.out.println("********************************** Test(13) getHeight() \n");
+		BST<Integer> B13 = new BST<>();
+		System.out.println("Should print -1: " + B13.getHeight());
+		B13.insert(5);
+		B13.insert(4);
+		B13.insert(6);
+		B13.insert(9);
+
+		B13.insert(8);
+
+		B13.insert(7);
+		B13.insert(3);
+		B13.insert(2);
+
+		System.out.println("Should print 4: " + B13.getHeight());
 		System.out.println();
 
 		System.out.println("****************************************************** End of BSTTest");

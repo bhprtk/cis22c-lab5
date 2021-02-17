@@ -109,7 +109,7 @@ public class BST<T extends Comparable<T>> {
 	 * @return the height of the tree
 	 */
 	public int getHeight() {
-		return -1;
+		return getHeight(root);
 	}
 
 	/**
@@ -119,7 +119,16 @@ public class BST<T extends Comparable<T>> {
 	 * @return the height of the tree
 	 */
 	private int getHeight(Node node) {
-		return -1;
+		if (node == null) {
+			return -1;
+		}
+		int leftHeight = getHeight(node.left) + 1;
+		int rightHeight = getHeight(node.right) + 1;
+		if (leftHeight > rightHeight) {
+			return leftHeight;
+		} else {
+			return rightHeight;
+		}
 	}
 
 	/**
