@@ -39,8 +39,17 @@ public class BST<T extends Comparable<T>> {
 	 * @param bst the BST of which to make a copy.
 	 * @param c   the way the tree is organized
 	 */
-	public BST(BST<T> bst, Comparator<T> c) {
-		// fill in here
+//	public BST(BST<T> bst, Comparator<T> c) {
+	public BST(BST<T> bst) {
+		if (bst == null) {
+			return;
+		}
+		if (bst.isEmpty()) {
+			root = null;
+		} else {
+			copyHelper(bst.root);
+		}
+
 	}
 
 	/**
@@ -49,8 +58,14 @@ public class BST<T extends Comparable<T>> {
 	 * @param node the node containing data to copy
 	 * @param c    the way the tree is organized
 	 */
-	private void copyHelper(Node node, Comparator<T> c) {
-		// fill in here
+//	private void copyHelper(Node node, Comparator<T> c) {
+	private void copyHelper(Node node) {
+		if (node == null) {
+			return;
+		}
+		insert(node.data);
+		copyHelper(node.left);
+		copyHelper(node.right);
 	}
 
 	/*** ACCESSORS ***/
@@ -395,8 +410,9 @@ public class BST<T extends Comparable<T>> {
 	 */
 	private void postOrderPrint(Node node) {
 		// fill in here
-		if (node == null)
+		if (node == null) {
 			return;
+		}
 		postOrderPrint(node.left);
 		postOrderPrint(node.right);
 		System.out.print(node.data + " ");

@@ -182,14 +182,35 @@ public class BSTTest {
 		B13.insert(4);
 		B13.insert(6);
 		B13.insert(9);
-
 		B13.insert(8);
-
 		B13.insert(7);
 		B13.insert(3);
 		B13.insert(2);
 
 		System.out.println("Should print 4: " + B13.getHeight());
+		System.out.println();
+
+		System.out.println("********************************** Test(14) Copy Constructor \n");
+
+		BST<Integer> B14 = new BST<>();
+		BST<Integer> B14copy = new BST<>(B14);
+
+		System.out.print("Should print an empty BST: ");
+		B14copy.inOrderPrint();
+
+		B14.insert(5);
+		B14.insert(4);
+		B14.insert(6);
+		B14.insert(9);
+		B14.insert(8);
+		B14.insert(7);
+		B14.insert(3);
+		B14.insert(2);
+		BST<Integer> B14copy2 = new BST<>(B14);
+
+		System.out.print("Should print 5 4 3 2 6 9 8 7: ");
+		B14copy2.preOrderPrint();
+
 		System.out.println();
 
 		System.out.println("****************************************************** End of BSTTest");
