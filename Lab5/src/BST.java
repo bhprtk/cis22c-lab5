@@ -9,7 +9,7 @@
 import java.util.NoSuchElementException;
 import java.util.Comparator;
 
-public class BST<T extends Comparable<T>> {
+public class BST<T> {
 	private class Node {
 		private T data;
 		private Node left;
@@ -39,15 +39,14 @@ public class BST<T extends Comparable<T>> {
 	 * @param bst the BST of which to make a copy.
 	 * @param c   the way the tree is organized
 	 */
-//	public BST(BST<T> bst, Comparator<T> c) {
-	public BST(BST<T> bst) {
+	public BST(BST<T> bst, Comparator<T> c) {
 		if (bst == null) {
 			return;
 		}
 		if (bst.isEmpty()) {
 			root = null;
 		} else {
-			copyHelper(bst.root);
+			copyHelper(bst.root, c);
 		}
 
 	}
@@ -58,14 +57,13 @@ public class BST<T extends Comparable<T>> {
 	 * @param node the node containing data to copy
 	 * @param c    the way the tree is organized
 	 */
-//	private void copyHelper(Node node, Comparator<T> c) {
-	private void copyHelper(Node node) {
+	private void copyHelper(Node node, Comparator<T> c) {
 		if (node == null) {
 			return;
 		}
-		insert(node.data);
-		copyHelper(node.left);
-		copyHelper(node.right);
+		insert(node.data, c);
+		copyHelper(node.left, c);
+		copyHelper(node.right, c);
 	}
 
 	/*** ACCESSORS ***/
@@ -182,7 +180,7 @@ public class BST<T extends Comparable<T>> {
 	 */
 	public T findMax() throws NoSuchElementException {
 		if (isEmpty()) {
-			throw new NoSuchElementException("findMax(): " + "BST is empty, cannot find min!");
+			throw new NoSuchElementException("findMax(): " + "BST is empty, cannot find max!");
 		}
 		return findMax(root);
 	}
@@ -203,18 +201,16 @@ public class BST<T extends Comparable<T>> {
 	/**
 	 * Searches for a specified value in the tree
 	 * 
-	 * @param data   the value to search for
-	 * @param update whether to update the node's data with the given data
-	 * @param c      the Comparator that indicates the way the data in the tree was
-	 *               ordered
+	 * @param data the value to search for
+	 * @param c    the Comparator that indicates the way the data in the tree was
+	 *             ordered
 	 * @return the data stored in that Node of the tree is found or null otherwise
 	 */
-//   public T search(T data, Comparator<T> c) {
-	public boolean search(T data) {
+	public T search(T data, Comparator<T> c) {
 		if (root == null) {
-			return false;
+			return null;
 		} else {
-			return search(data, root);
+			return search(data, root, c);
 		}
 	}
 
@@ -226,30 +222,28 @@ public class BST<T extends Comparable<T>> {
 	 * @param c    the Comparator that determines how the BST is organized
 	 * @return the data stored in that Node of the tree is found or null otherwise
 	 */
-//   private T search(T data, Node node, Comparator<T> c) {
-	private boolean search(T data, Node node) {
-		if (data.compareTo(node.data) == 0) {
-			return true;
-		} else if (data.compareTo(node.data) < 0) {
+	private T search(T data, Node node, Comparator<T> c) {
+		if (c.compare(data, node.data) == 0) {
+			return node.data;
+		} else if (c.compare(data, node.data) <= -1) {
 			// smaller
 			if (node.left == null) {
 				// value not found
-				return false;
+				return null;
 			} else {
 				// go left
-				search(data, node.left);
+				return search(data, node.left, c);
 			}
 		} else {
 			// bigger: go right
 			if (node.right == null) {
 				// value not found
-				return false;
+				return null;
 			} else {
 				// go right
-				search(data, node.right);
+				return search(data, node.right, c);
 			}
 		}
-		return false;
 	}
 
 	/*** MUTATORS ***/
@@ -260,12 +254,11 @@ public class BST<T extends Comparable<T>> {
 	 * @param data the data to insert
 	 * @param c    the Comparator indicating how data in the tree is ordered
 	 */
-//   public void insert(T data, Comparator<T> c) {
-	public void insert(T data) {
+	public void insert(T data, Comparator<T> c) {
 		if (root == null) {
 			root = new Node(data);
 		} else {
-			insert(data, root);
+			insert(data, root, c);
 		}
 	}
 
@@ -276,22 +269,21 @@ public class BST<T extends Comparable<T>> {
 	 * @param node the current node in the search for the correct location to insert
 	 * @param c    the Comparator indicating how data in the tree is ordered
 	 */
-//   private void insert(T data, Node node, Comparator<T> c) {
-	private void insert(T data, Node node) {
-		if (data.compareTo(node.data) >= 1) {
+	private void insert(T data, Node node, Comparator<T> c) {
+		if (c.compare(data, node.data) >= 1) {
 			// bigger - insert to right
 			if (node.right == null) {
 				node.right = new Node(data);
 				return;
 			}
-			insert(data, node.right);
+			insert(data, node.right, c);
 		} else {
 			// smaller or equal - insert to left
 			if (node.left == null) {
 				node.left = new Node(data);
 				return;
 			}
-			insert(data, node.left);
+			insert(data, node.left, c);
 		}
 	}
 
@@ -301,16 +293,9 @@ public class BST<T extends Comparable<T>> {
 	 * @param data the value to remove
 	 * @param c    the Comparator indicating how data in the tree is organized Note:
 	 *             updates nothing when the element is not in the tree
-	 * @precondition !isEmpty()
-	 * @precondition the data is located in the tree
-	 * @throws NoSuchElementException when the precondition is violated
 	 */
-//	public void remove(T data, Comparator<T> c) throws NoSuchElementException {
-	public void remove(T data) throws NoSuchElementException {
-		if (isEmpty()) {
-			throw new NoSuchElementException("remove(): " + "BST is empty. Cannot remove!");
-		}
-		remove(data, root);
+	public void remove(T data, Comparator<T> c) {
+		root = remove(data, root, c);
 	}
 
 	/**
@@ -321,16 +306,15 @@ public class BST<T extends Comparable<T>> {
 	 * @param c    the Comparator indicating how data in the tree is organized
 	 * @return an updated reference variable
 	 */
-//	private Node remove(T data, Node node, Comparator<T> c) {
-	private Node remove(T data, Node node) {
+	private Node remove(T data, Node node, Comparator<T> c) {
 		if (node == null) {
 			return node;
-		} else if (data.compareTo(node.data) < 0) {
+		} else if (c.compare(data, node.data) <= -1) {
 			// data < node.data
-			node.left = remove(data, node.left);
-		} else if (data.compareTo(node.data) > 0) {
+			node.left = remove(data, node.left, c);
+		} else if (c.compare(data, node.data) >= 1) {
 			// data > node.data
-			node.right = remove(data, node.right);
+			node.right = remove(data, node.right, c);
 		} else {
 			if (node.right == null && node.left == null) {
 				// leaf node
@@ -345,7 +329,7 @@ public class BST<T extends Comparable<T>> {
 				// has both child
 				T minRight = findMin(node.right);
 				node.data = minRight;
-				node.right = remove(minRight, node.right);
+				node.right = remove(minRight, node.right, c);
 			}
 		}
 		return node;
@@ -378,7 +362,6 @@ public class BST<T extends Comparable<T>> {
 	 * Prints the data in sorted order to the console followed by a new line
 	 */
 	public void inOrderPrint() {
-		// fill in here
 		inOrderPrint(root);
 		System.out.println();
 	}
@@ -392,7 +375,7 @@ public class BST<T extends Comparable<T>> {
 			return;
 		}
 		inOrderPrint(node.left);
-		System.out.print(node.data + " ");
+		System.out.print(node.data);
 		inOrderPrint(node.right);
 	}
 
@@ -409,7 +392,6 @@ public class BST<T extends Comparable<T>> {
 	 * console
 	 */
 	private void postOrderPrint(Node node) {
-		// fill in here
 		if (node == null) {
 			return;
 		}
