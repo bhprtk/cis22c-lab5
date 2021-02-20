@@ -73,7 +73,7 @@ public class BSTTest {
 
 		System.out.println("\n**************************************************** findMax()\n");
 		System.out.println("Should print Carrot: " + B_name.findMax());
-		System.out.println("Should print Banana: " + B_name.findMax());
+		System.out.println("Should print Banana: " + B_value.findMax());
 		try {
 			B_empty.findMax();
 		} catch (NoSuchElementException e) {
