@@ -92,7 +92,6 @@ public class MutualFund {
 		result += fundName + "\n";
 		result += ticker + "\n";
 		result += "Share Price: $" + new DecimalFormat("###,###.00").format(pricePerShare);
-//	  result += "\n";
 		return result;
 	}
 
